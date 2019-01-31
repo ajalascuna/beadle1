@@ -20,29 +20,33 @@
   require "dbconnect.php";
   
     $data = file_get_contents("php://input");
+    
     if (isset($data)) {
+       
         $request = json_decode($data);
         $username = $request->username;
 		$password = $request->password;
  
-	}
-	
+    }
+    
+	$username = stripslashes($username);
+    $password = stripslashes($password);
 	  $sql = "SELECT id FROM users WHERE username = '$username' and password = '$password' ";
-      $result = mysqli_query($con,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $active = $row['active'];
-      
-      $count = mysqli_num_rows($result);
-      
+
+   // $sql = "SELECT * FROM users";
+    $result = mysqli_query($con, $sql);
+    if(mysqli_num_rows($result) > 0)
+    {
+        $outp = array();
+        $outp = $result->fetch_all(MYSQLI_ASSOC);
+        $response= "Successful";
+    }else {
+        $response= "Your Login Email or Password is invalid";
+    }
       // If result matched $myusername and $mypassword, table row must be 1 row
-		
-      if($count >0) {
-     $response= "Login Successful";
-      }else {
-    $response= "Your Login Email or Password is invalid";
-		
-      }
-   
-	 
+
+
 	echo json_encode($response);
 ?>
+
+

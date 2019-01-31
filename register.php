@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
         header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
         header('Access-Control-Allow-Credentials: true');
@@ -33,7 +34,7 @@ $password = stripslashes($password);
 $sql = "INSERT INTO users (username, password, telephone, email)
 VALUES ('$username', '$password', '$telephone', '$emailadd')";
 if ($con->query($sql) === TRUE) {
-	$response= "Registration successfull";
+	$response= "Successful";
    
 } else {
    $response= "Error: " . $sql . "<br>" . $db->error;

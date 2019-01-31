@@ -10,11 +10,14 @@ import 'rxjs/add/operator/map';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
 
 
 @ViewChild("username") username;
 @ViewChild("password") password;
+@ViewChild("telephone") telephone;
+@ViewChild("email") email;
 data:string;
 items:any;
 
@@ -58,43 +61,48 @@ signIn(){
  else
  {
 
-  var headers = new Headers();
-    headers.append("Accept", 'application/json');
-    headers.append('Content-Type', 'application/json' );
-    let options = new RequestOptions({ headers: headers });
+   var headers = new Headers();
+     headers.append("Accept", 'application/json');
+     headers.append('Content-Type', 'application/json' );
+     let options = new RequestOptions({ headers: headers });
 
 
-      let data = {
-        username: this.username.value,
-        password: this.password.value
-      };
+       let data = {
+         username: this.username.value,
+         password: this.password.value
+       };
 
       
 
- let loader = this.loading.create({
-    content: 'Processing please wait...',
-  });
+  let loader = this.loading.create({
+     content: 'Processing please wait...',
+   });
 
- loader.present().then(() => {
+  loader.present().then(() => {
 
 
-  this.http.post('http://ionicdon.com/mobile/login.php',data,options)
-  //this.http.post('http://localhost:8080/beadle1/login.php',data,options)
-  .map(res => res.json())
-  .subscribe(res => {
-  console.log(res)
-   loader.dismiss()
-  if(res=="Your Login success"){
+   //this.http.post('http://ionicdon.com/mobile/login.php',data,options)
+   this.http.post('http://localhost:8080/beadle1/login.php',data,options)
+   .map(res => res.json())
+   .subscribe(res => {
+//     console.log(res)
+
+
+     loader.dismiss()
+   if(res=="Successful"){
    
-    let alert = this.alertCtrl.create({
-      title:"CONGRATS",
-      subTitle:(res),
-      buttons: ['OK']
-      });
+     let alert = this.alertCtrl.create({
+       title:"CONGRATS",
+       subTitle:(res),
+       buttons: ['OK']
+       });
      
-      alert.present();
-      this.navCtrl.push(ProfilePage, data);
-  }else
+       alert.present();
+       //this.navCtrl.push(ProfilePage, data);
+       this.navCtrl.push(ProfilePage, data);
+
+   }
+   else
   {
    let alert = this.alertCtrl.create({
    title:"ERROR",
@@ -105,7 +113,7 @@ signIn(){
    alert.present();
     } 
   });
-  });
+   });
    }
   
   }

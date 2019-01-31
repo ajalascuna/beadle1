@@ -5,44 +5,39 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>profile</ion-title>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <h2>Subjects</h2>
+  
+      <ion-item *ngFor="let item of items" (click)='attendance(item)'>
+     <h2>{{item.subj_name}}</h2>
+     <h4>{{item.reg_id}}</h4>
+  
+     <h4>{{item.sem}}</h4>
+     <h4>{{item.sy}}</h4>
+     <h4>{{item.subj_sched}}</h4>
+  
+  
+    </ion-item>
+  
+  
+  
+  </ion-content>
+<!--
+<ion-tabs>
+    <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="Register" tabIcon="information-circle"></ion-tab>
+  </ion-tabs>
 
-<ion-item *ngFor="let item of items" >
-  <h2>Welcome {{item.username}}</h2>
-  <h3>Your profile information is as follows:</h3>
-  <ion-row>
-    <ion-col col-4>
-     Password
-    </ion-col>
-    <ion-col col-8>
-  {{item.password}}
-    </ion-col>
- 
-</ion-row>
-<ion-row>
-    <ion-col col-4>
-      Telephone
-    </ion-col>
-    <ion-col col-8>
-  {{item.telephone}}
-    </ion-col>
- 
-</ion-row>
-<ion-row>
-    <ion-col col-4>
-    Email 
-    </ion-col>
-    <ion-col col-8>
-  {{item.email}}
-    </ion-col>
- 
-</ion-row>
- </ion-item>
-</ion-content>
+-->

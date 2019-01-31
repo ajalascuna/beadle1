@@ -94,12 +94,13 @@ var headers = new Headers();
   });
 
  loader.present().then(() => {
-this.http.post('http://localhost:8080/beadle1/register.php',data, options)
+  //this.http.post('http://ionicdon.com/mobile/register.php',data, options)
+  this.http.post('http://localhost:8080/beadle1/register.php',data, options)
 .map(res => res.json())
 .subscribe(res => {
 
  loader.dismiss()
-if(res=="Registration successfull"){
+if(res=="Successful"){
   let alert = this.alertCtrl.create({
     title:"CONGRATS",
     subTitle:(res),

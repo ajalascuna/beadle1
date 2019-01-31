@@ -18,17 +18,31 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
     }
 	
 require "dbconnect.php";
-$sql ="SELECT * FROM users;";
+
+//$data = file_get_contents("php://input");
+    
+//if (isset($data)) {
+   
+ //   $request = json_decode($data);
+  //  $username = $request->username;
+
+//}
+
+//$username = stripslashes($username);
+
+$sql = "SELECT * FROM registration ";
 $result = mysqli_query($con, $sql);
 $response = array();
 while($row = mysqli_fetch_array($result))
 {
-	array_push($response, array("id"=>$row[0],
-                                "username"=>$row[1],
-                                "password"=>$row[2],
-                                "telephone"=>$row[3],
-								"email"=>$row[4] ));
+	array_push($response, array("reg_id"=>$row[0],
+                                "subj_name"=>$row[1],
+                                "sem"=>$row[2],
+                                "sy"=>$row[3],
+                                "subj_sched"=>$row[4] ));
 	
 }
 echo json_encode(array("server_response"=> $response));
 ?>
+
+
